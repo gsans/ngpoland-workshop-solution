@@ -12,6 +12,9 @@
           "/manifest.webmanifest",
           "/*.css",
           "/*.js"
+        ],
+        "urls": [ 
+          "https://aws-amplify.github.io/images/Logos/Amplify-Logo-White.svg"
         ]
       }
     },
