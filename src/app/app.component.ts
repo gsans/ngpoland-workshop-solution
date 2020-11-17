@@ -5,6 +5,7 @@ import { DataStore, Predicates } from "@aws-amplify/datastore";
 import { Chatty } from "../models";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from "moment";
+import { Hub } from 'aws-amplify';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,8 @@ export class AppComponent implements OnInit, OnDestroy {
   messages: Array<Chatty>;
   public createForm: FormGroup;
   subscription;
+  listener = undefined;
+  offline = undefined;
 
   loadMessages() {
     DataStore.query<Chatty>(Chatty, Predicates.ALL)
@@ -40,6 +43,15 @@ export class AppComponent implements OnInit, OnDestroy {
         this.ref.detectChanges();
       }
     })
+    //listen to datastore
+    console.log('Registering datastore hub');
+    this.listener = Hub.listen('datastore', message => {
+      const { event, data } = message.payload;
+      console.log("DataStore event", event, data);
+      if (event === 'networkStatus') {
+        this.offline = !data.active;
+      }
+    })
     this.loadMessages();
     this.subscription = DataStore.observe<Chatty>(Chatty).subscribe(msg => {
       console.log(msg.model, msg.opType, msg.element);
@@ -48,6 +60,9 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     this.unregister();
+    this.listener();
+    if (!this.subscription) return;
+    this.subscription.unsubscribe();
   }
   public onCreate(message: any) {
     if (message.message == "") return;
@@ -61,9 +76,9 @@ export class AppComponent implements OnInit, OnDestroy {
       this.createForm.reset();
       this.loadMessages();
     })
-      .catch(e => {
-        console.log('error creating message...', e);
-      });
+    .catch(e => {
+      console.log('error creating message...', e);
+    });
   }
   public async onDeleteAll() {
     await DataStore.delete<Chatty>(Chatty, Predicates.ALL)

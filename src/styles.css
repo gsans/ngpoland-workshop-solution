@@ -348,3 +348,15 @@ select
     width: 100px;
   }
 }
+
+.offline, .input.offline {
+  background: #F06292;
+}
+.offline-msg {
+  position: relative;
+  height: 60px;
+  padding-top: 10px;
+  font-weight: 600;
+  font-size: 1em;
+  font-style: italic;
+}
