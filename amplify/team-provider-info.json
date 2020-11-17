@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-ngpoland-dev-192946-authRole",
+      "UnauthRoleArn": "arn:aws:iam::664371068953:role/amplify-ngpoland-dev-192946-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::664371068953:role/amplify-ngpoland-dev-192946-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-ngpoland-dev-192946-deployment",
+      "UnauthRoleName": "amplify-ngpoland-dev-192946-unauthRole",
+      "StackName": "amplify-ngpoland-dev-192946",
+      "StackId": "arn:aws:cloudformation:eu-central-1:664371068953:stack/amplify-ngpoland-dev-192946/426f1f90-290b-11eb-bd1e-0a738d9d93c8",
+      "AmplifyAppId": "d2cw2gs3qn76q5"
+    },
+    "categories": {
+      "auth": {
+        "ngpoland16b9c76c": {}
+      }
+    }
+  }
+}
