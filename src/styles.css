@@ -258,14 +258,6 @@ width: 75px;
   width: 100%;
 }
 
-::-webkit-scrollbar {
-  min-width: 12px;
-  width: 12px;
-  max-width: 12px;
-  min-height: 12px;
-  height: 12px;
-  max-height: 12px;
-}
 ::-webkit-scrollbar-thumb {
   background: #9e9e9e;
   border: none;
